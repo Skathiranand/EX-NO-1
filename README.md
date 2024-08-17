@@ -24,168 +24,148 @@ STEP 6: Use zscore of to remove outliers
 ## Data Cleaning
 ```
 import pandas as pd
-df=pd.read_csv("/SAMPLEIDS.csv")
+df=pd.read_csv("/content/SAMPLEIDS.csv")
 df
-```
-![alt text](<Screenshot 2024-08-17 105530.png>)
-![alt text](<Screenshot 2024-08-17 105639.png>)
 
 ```
-import pandas as pd
-df=pd.read_csv("/SAMPLEIDS.csv")
+![output](./Outputs/D1.png)
+
+```
 df.isnull().sum()
 ```
-![alt text](<Screenshot 2024-08-17 105746.png>)
+![output](./Outputs/D2.png)
 
 ```
-import pandas as pd
-df=pd.read_csv("/SAMPLEIDS.csv")
 df.isnull().any()
 ```
-![alt text](<Screenshot 2024-08-17 105759.png>)
+![output](./Outputs/D3.png)
 
 ```
-import pandas as pd
-df=pd.read_csv("/SAMPLEIDS.csv")
 df.dropna()
 ```
-![alt text](<Screenshot 2024-08-17 105822.png>)
+![output](./Outputs/D4.png)
 
 ```
-import pandas as pd
-df=pd.read_csv("/SAMPLEIDS.csv")
 df.fillna(0)
 ```
-![alt text](<Screenshot 2024-08-17 105842.png>)
-![alt text](<Screenshot 2024-08-17 105849.png>)
+![output](./Outputs/D5.png)
 
 ```
-import pandas as pd
-df=pd.read_csv("/SAMPLEIDS.csv")
-df.fillna(method = 'ffill')
+df.fillna(method = "ffill")
 ```
-![alt text](<Screenshot 2024-08-17 105901.png>)
-![alt text](<Screenshot 2024-08-17 105908.png>)
+![output](./Outputs/D6.png)
 
 ```
-import pandas as pd
-df=pd.read_csv("/SAMPLEIDS.csv")
 df.fillna(method = 'bfill')
 ```
-![alt text](<Screenshot 2024-08-17 105921.png>)
-![alt text](<Screenshot 2024-08-17 105928.png>)
+![output](./Outputs/D7.png)
 
 ```
-import pandas as pd
-df=pd.read_csv("/SAMPLEIDS.csv")
 df_dropped = df.dropna()
 df_dropped
 ```
-![alt text](<Screenshot 2024-08-17 110037.png>)
+![output](./Outputs/D8.png)
 
 ```
-import pandas as pd
-df=pd.read_csv("/SAMPLEIDS.csv")
 df.fillna({'GENDER':'MALE','NAME':'SRI','ADDRESS':'POONAMALEE','M1':98,'M2':87,'M3':76,'M4':92,'TOTAL':305,'AVG':89.999999})
 ```
-![alt text](<Screenshot 2024-08-17 110119.png>)
-![alt text](<Screenshot 2024-08-17 110126.png>)
+![output](./Outputs/D9.png)
 
 ## IQR(Inter Quartile Range)
 ```
-import pandas as pd
-ir=pd.read_csv("/iris.csv")
+ir=pd.read_csv('iris.csv')
 ir
 ```
-![alt text](<Screenshot 2024-08-17 111512.png>)
+![output](./Outputs/I1.png)
+
 ```
-import pandas as pd
-ir=pd.read_csv("/iris.csv")
 ir.describe()
 ```
-![alt text](<Screenshot 2024-08-17 111522.png>)
-```
-import pandas as pd
-ir=pd.read_csv("/iris.csv")
-c1=ir.sepal_width.quantile(0.25)
-c3=ir.sepal_width.quantile(0.75)
-iq=c3-c1
-print(c3)
-```
-![alt text](<Screenshot 2024-08-17 111530.png>)
-```
-import pandas as pd
-ir=pd.read_csv("/iris.csv")
-rid=ir[((ir.sepal_width<(c1-1.5*iq))|(ir.sepal_width>(c3+1.5*iq)))]
-rid['sepal_width']
-```
-![alt text](<Screenshot 2024-08-17 111537.png>)
+![output](./Outputs/I2.png)
+
 ```
 import seaborn as sns
 import matplotlib.pyplot as plt
 sns.boxplot(x='sepal_width',data=ir)
 plt.show()
+
 ```
-![alt text](<Screenshot 2024-08-17 111548.png>)
+![output](./Outputs/I3.png)
+
 ```
-import pandas as pd
-ir=pd.read_csv("/iris.csv")
+ c1=ir.sepal_width.quantile(0.25)
+ c3=ir.sepal_width.quantile(0.75)
+ iq=c3-c1
+ print(c3)
+```
+![output](./Outputs/I4.png)
+
+```
+rid=ir[((ir.sepal_width<(c1-1.5*iq))|(ir.sepal_width>(c3+1.5*iq)))]
+rid['sepal_width']
+```
+![output](./Outputs/I5.png)
+
+```
 delid=ir[~((ir.sepal_width<(c1-1.5*iq))|(ir.sepal_width>(c3+1.5*iq)))]
 delid
 ```
-![alt text](<Screenshot 2024-08-17 111556.png>)
-```
-import seaborn as sns
-import matplotlib.pyplot as plt
-sns.boxplot(x='sepal_width',data=delid)
-plt.show()
-```
-![alt text](<Screenshot 2024-08-17 111617.png>)
+![output](./Outputs/I6.png)
 
-## Z-Score
+```
+sns.boxplot(x='sepal_width',data=delid)
+```
+![output](./Outputs/I7.png)
+
+## Z - Score
 ```
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import scipy.stats as stats
-dataset=pd.read_csv("/heights.csv")
+dataset=pd.read_csv("heights.csv")
 dataset
 ```
-![alt text](<Screenshot 2024-08-17 112133.png>)
+![output](./Outputs/Z1.png)
+
 ```
-df = pd.read_csv("/heights.csv")
+df = pd.read_csv("heights.csv")
 q1 = df['height'].quantile(0.25)
 q2 = df['height'].quantile(0.5)
 q3 = df['height'].quantile(0.75)
 iqr = q3-q1
 iqr
 ```
-![alt text](<Screenshot 2024-08-17 112142.png>)
+![output](./Outputs/Z2.png)
+
 ```
-low = q1 - 1.5*iqr
+low = q1- 1.5*iqr
 low
 ```
-![alt text](<Screenshot 2024-08-17 112208.png>)
+![output](./Outputs/Z3.png)
+
 ```
 high = q3 + 1.5*iqr
 high
 ```
-![alt text](<Screenshot 2024-08-17 112219.png>)
+![output](./Outputs/Z4.png)
+
 ```
 df1 = df[((df['height'] >=low)& (df['height'] <=high))]
 df1
 ```
-![alt text](<Screenshot 2024-08-17 112227.png>)
+![output](./Outputs/Z5.png)
+
 ```
 z = np.abs(stats.zscore(df['height']))
 z
 ```
-![alt text](<Screenshot 2024-08-17 112238.png>)
+![output](./Outputs/Z6.png)
+
 ```
 df1 = df[z<3]
 df1
 ```
-![alt text](<Screenshot 2024-08-17 112249.png>)
-
+![output](./Outputs/Z7.png)
 # Result
 Thus we have cleaned the data and removed the outliers by detection using IQR and Z-score method.
